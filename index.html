@@ -10,13 +10,13 @@
                 return;
             }
             
-            // Buy Stop Calculations
+            // Main Strategy - Buy Stop Calculations
             let buyEntry = openingPoint + 12.4;
             let buyTakeProfit1 = buyEntry + 3;
             let buyTakeProfit2 = buyEntry + 5;
             let buyStopLoss = buyEntry - 18;
             
-            // Sell Stop Calculations
+            // Main Strategy - Sell Stop Calculations
             let sellEntry = openingPoint - 12.4;
             let sellTakeProfit1 = sellEntry - 3;
             let sellTakeProfit2 = sellEntry - 5;
@@ -32,6 +32,32 @@
             document.getElementById('sellTakeProfit2').innerText = "Sell Stop - Take Profit 2: " + sellTakeProfit2.toFixed(2);
             document.getElementById('sellStopLoss').innerText = "Sell Stop - Stop Loss: " + sellStopLoss.toFixed(2);
         }
+
+        function calculateLowRisk() {
+            let openingPoint = parseFloat(document.getElementById('openingPointLowRisk').value);
+            if (isNaN(openingPoint)) {
+                alert("Please enter a valid opening point");
+                return;
+            }
+
+            // Low Risk Strategy - Buy Stop
+            let lowRiskBuyEntry = openingPoint + 12.4;
+            let lowRiskBuyTakeProfit = lowRiskBuyEntry + 0.5;
+            let lowRiskBuyStopLoss = lowRiskBuyEntry - 9;
+
+            // Low Risk Strategy - Sell Stop
+            let lowRiskSellEntry = openingPoint - 12.4;
+            let lowRiskSellTakeProfit = lowRiskSellEntry - 0.5;
+            let lowRiskSellStopLoss = lowRiskSellEntry + 9;
+
+            document.getElementById('lowRiskBuyEntry').innerText = "Low Risk Buy Stop - Entry Point: " + lowRiskBuyEntry.toFixed(2);
+            document.getElementById('lowRiskBuyTakeProfit').innerText = "Low Risk Buy Stop - Take Profit: " + lowRiskBuyTakeProfit.toFixed(2);
+            document.getElementById('lowRiskBuyStopLoss').innerText = "Low Risk Buy Stop - Stop Loss: " + lowRiskBuyStopLoss.toFixed(2);
+
+            document.getElementById('lowRiskSellEntry').innerText = "Low Risk Sell Stop - Entry Point: " + lowRiskSellEntry.toFixed(2);
+            document.getElementById('lowRiskSellTakeProfit').innerText = "Low Risk Sell Stop - Take Profit: " + lowRiskSellTakeProfit.toFixed(2);
+            document.getElementById('lowRiskSellStopLoss').innerText = "Low Risk Sell Stop - Stop Loss: " + lowRiskSellStopLoss.toFixed(2);
+        }
     </script>
 </head>
 <body>
@@ -40,16 +66,31 @@
     <input type="number" id="openingPoint" step="0.01">
     <button onclick="calculate()">Calculate</button>
     
-    <h3>Buy Stop</h3>
+    <h3>Main Strategy - Buy Stop</h3>
     <p id="buyEntry"></p>
     <p id="buyTakeProfit1"></p>
     <p id="buyTakeProfit2"></p>
     <p id="buyStopLoss"></p>
     
-    <h3>Sell Stop</h3>
+    <h3>Main Strategy - Sell Stop</h3>
     <p id="sellEntry"></p>
     <p id="sellTakeProfit1"></p>
     <p id="sellTakeProfit2"></p>
     <p id="sellStopLoss"></p>
+
+    <h2>Low Risk Strategy</h2>
+    <label for="openingPointLowRisk">Opening Point:</label>
+    <input type="number" id="openingPointLowRisk" step="0.01">
+    <button onclick="calculateLowRisk()">Calculate Low Risk</button>
+
+    <h3>Low Risk Strategy - Buy Stop</h3>
+    <p id="lowRiskBuyEntry"></p>
+    <p id="lowRiskBuyTakeProfit"></p>
+    <p id="lowRiskBuyStopLoss"></p>
+
+    <h3>Low Risk Strategy - Sell Stop</h3>
+    <p id="lowRiskSellEntry"></p>
+    <p id="lowRiskSellTakeProfit"></p>
+    <p id="lowRiskSellStopLoss"></p>
 </body>
 </html>
